@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Practice Fun Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fffae6;
+      color: #444;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #ffcc80;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section {
+      background-color: #fff3e0;
+      margin: 1.5rem 0;
+      border: 2px solid #ffcc80;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-2px);
+    }
+
+    .section-header {
+      padding: 1rem 1.5rem;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px 10px 0 0;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-header:after {
+      content: '▼';
+      font-size: 0.8em;
+      transition: transform 0.3s ease;
+    }
+
+    .section-header.active:after {
+      transform: rotate(180deg);
+    }
+
+    .section-header:hover {
+      background-color: #ffe0b2;
+    }
+
+    .section-content {
+      display: none;
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      background-color: #fffde7;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .section-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .section-content ul li {
+      margin: 0.8rem 0;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s ease;
+      border-radius: 5px;
+    }
+
+    .section-content ul li:hover {
+      background-color: #fff3e0;
+    }
+
+    .section-content ul li:before {
+      content: '○';
+      margin-right: 10px;
+      color: #ff6f00;
+    }
+
+    .section-content ul li.completed:before {
+      content: '●';
+    }
+
+    .btn {
+      background-color: #ff6f00;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: block;
+      margin: 2rem auto;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background-color: #e65100;
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .progress-bar {
+      height: 6px;
+      background-color: #ffcc80;
+      width: 0;
+      transition: width 0.3s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 101;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      header {
+        font-size: 1.5rem;
+        padding: 1rem;
+      }
+
+      .section-header {
+        font-size: 1.1rem;
+        padding: 0.8rem 1rem;
+      }
+
+      .btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar"></div>
+  <header>Daily Practice Fun Planner</header>
+  <div class="container">
+    <div class="section">
+      <div class="section-header" onclick="toggleContent(this)">🎨 Art Stuff to Practice</div>
+      <div class="section-content">
+        <ul>
+          <li>Screenwriting</li>
+          <li>Music creation</li>
+          <li>Drawing</li>
+          <li>Movie-watching</li>
+          <li>Generating AI images</li>
+          <li>Video editing</li>
+          <li>Listening to new and faith-building music</li>
+          <li>Playing video games</li>
+          <li>Photography</li>
+          <li>Reading</li>
+          <li>Photoshop</li>
+          <li>Writing a newsletter</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header" onclick="toggleContent(this)">⏰ Daily Habits</div>
+      <div class="section-content">
+        <ul>
+          <li>Practice random acts of kindness</li>
+          <li>Set timers for tasks</li>
+          <li>Goal-setting the day before?</li>
+          <li>Waking up at 5 AM?</li>
+          <li>4+ hours of deep work?</li>
+          <li>10 outbound work request emails per day</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header" onclick="toggleContent(this)">📈 Goals</div>
+      <div class="section-content">
+        <ul>
+          <li>3 goals for the day or top 5 priorities, ranked(?)</li>
+          <li>Weekly goal</li>
+          <li>Monthly goal</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header" onclick="toggleContent(this)">🌟 Social Media and Outreach</div>
+      <div class="section-content">
+        <ul>
+          <li>Post achievements on X and Facebook</li>
+          <li>Engage with others on LinkedIn</li>
+          <li>Ask questions and give compliments before DMing</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header" onclick="toggleContent(this)">🌻 Wellness</div>
+      <div class="section-content">
+        <ul>
+          <li>Seal windows for darkness and better sleep</li>
+          <li>Take time off from social media</li>
+          <li>Track what you want to change</li>
+          <li>Write down reasons for your actions</li>
+        </ul>
+      </div>
+    </div>
+    <button class="btn" onclick="celebrate()">Let's Do This!</button>
+  </div>
+
+  <script>
+    // Function to toggle section content visibility
+    function toggleContent(header) {
+      header.classList.toggle('active');
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      updateProgress();
+    }
+
+    // Update the progress bar
+    function updateProgress() {
+      const totalSections = document.querySelectorAll('.section').length;
+      const openSections = document.querySelectorAll('.section-content[style="display: block"]').length;
+      const progress = (openSections / totalSections) * 100;
+      document.querySelector('.progress-bar').style.width = `${progress}%`;
+    }
+
+    // Celebrate completion of tasks
+    function celebrate() {
+      const btn = document.querySelector('.btn');
+      btn.style.transform = 'scale(1.1)';
+      setTimeout(() => btn.style.transform = 'scale(1)', 200);
+      
+      const completedTasks = document.querySelectorAll('.section-content li.completed').length;
+      const totalTasks = document.querySelectorAll('.section-content li').length;
+      
+      if (completedTasks === totalTasks) {
+        alert('Amazing! You\'ve completed all tasks! 🎉');
+      } else {
+        alert('Great job! Have a productive day! 🌟');
+      }
+    }
+
+    // Add click handler for list items to toggle completion
+    document.querySelectorAll('.section-content li').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('completed');
+      });
+    });
+
+    // Array of motivational quotes
+    const quotes = [
+      "You are capable of amazing things. 🌟",
+      "Every step you take is progress. Keep moving forward! 🚶‍♂️",
+      "Dream it. Believe it. Achieve it. 💡",
+      "Small steps every day lead to big results. 🏆",
+      "Focus on the journey, not just the destination. 🚀",
+      "Your potential is endless. Push yourself! 🔥",
+      "Celebrate every small win. They build momentum. 🎉",
+      "Keep going. You're closer than you think. 💪",
+      "Believe in yourself. You’ve got this! 💖",
+      "Don’t wait for opportunity. Create it. 🛠️"
+    ];
+
+    // Function to display a random quote
+    function displayQuote() {
+      const header = document.querySelector('header');
+      const quote = document.createElement('div');
+      quote.id = 'motivational-quote';
+      quote.style.padding = '1rem';
+      quote.style.fontSize = '1.2rem';
+      quote.style.fontStyle = 'italic';
+      quote.style.backgroundColor = '#ffe0b2';
+      quote.style.borderRadius = '12px';
+      quote.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+      quote.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+      header.after(quote);
+    }
+
+    // Call the function to display the quote on page load
+    window.onload = displayQuote;
+  </script>
+</body>
+</html>
